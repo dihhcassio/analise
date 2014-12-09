@@ -15,8 +15,10 @@ class EventoDAO extends AbstractDAO {
     }
 
     public function insert($model) {
-        return $this->execultQuery("INSERT INTO evento(nome)"
-                        . " VALUES('" . $model->getNome() . "')");
+        return $this->execultQuery("INSERT INTO evento(nome, inicio, fim)"
+                        . " VALUES('" . $model->getNome() . "', "
+                        . " '" . $model->getInicio() . "',"
+                        . " '" . $model->getFim() .  "')");   
     }
 
     public function update($model) {

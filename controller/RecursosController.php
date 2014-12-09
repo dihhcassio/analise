@@ -13,6 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         default :
             break;
     }
+} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $controller = new RecursosController();
+    $controller->insert($_POST['nome']);
+    header("Location: ../recursos.php");
 }
 
 class RecursosController {
@@ -26,6 +30,11 @@ class RecursosController {
     public function getAllJson() {
         $listRecursos = pg_fetch_all($this->dao->getAll());
         return json_encode($listRecursos);
+    }
+
+    public function insert($nome) {
+        $evento = new Recurso($nome);
+        $this->dao->insert($evento);
     }
 
 }

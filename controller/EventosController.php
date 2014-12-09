@@ -1,4 +1,5 @@
 <?php
+
 include_once '../dao/EventoDAO.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
@@ -12,6 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         default :
             break;
     }
+} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $controller = new EventosController();
+    $controller->insert($_POST['nome'], $_POST['dtinicio'] . " " . $_POST['hinicio'] . ":00", $_POST['dtfim'] . " " . $_POST['hfim'] . ":00");
+    header("Location: ../evento.php");
 }
 
 class EventosController {
@@ -25,6 +30,11 @@ class EventosController {
     public function getAllJson() {
         $listRecursos = pg_fetch_all($this->dao->getAll());
         return json_encode($listRecursos);
+    }
+
+    public function insert($nome, $inicio, $fim) {
+        $evento = new Evento($nome, $inicio, $fim);
+        $this->dao->insert($evento);
     }
 
 }

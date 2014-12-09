@@ -23,6 +23,10 @@
         <?php include "_menu.php" ?> 
 
         <div class="container">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Cadastrar
+            </button>
             <table data-toggle="table" 
                    data-url="controller/EventosController.php?acao=getAll" 
                    data-cache="false" data-height="299">
@@ -37,6 +41,76 @@
                     </tr>
                 </thead>
             </table>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form class="form-horizontal" action="controller/EventosController.php"
+                          method="post">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Cadastro Evento</h4>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <fieldset>
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="nome">Nome</label>  
+                                        <div class="col-md-4">
+                                            <input id="nome" name="nome" type="text" placeholder="" class="form-control input-md" required="">
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="dtinicio"> Data Início</label>  
+                                        <div class="col-md-4">
+                                            <input id="inicio" name="dtinicio" type="date" placeholder="" class="form-control input-md" required="">
+
+                                        </div>
+                                    </div>
+                                    
+                                         <div class="form-group">
+                                        <label class="col-md-4 control-label" for="hinicio"> Hora Início</label>  
+                                        <div class="col-md-4">
+                                            <input id="inicio" name="hinicio" type="time" placeholder="" class="form-control input-md" required="">
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="dtfim"> Data Fim</label>  
+                                        <div class="col-md-4">
+                                            <input id="fim" name="dtfim" type="date" placeholder="" class="form-control input-md" required="">
+
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Text input-->
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="hfim"> Hora Fim</label>  
+                                        <div class="col-md-4">
+                                            <input id="fim" name="hfim" type="time" placeholder="" class="form-control input-md" required="">
+
+                                        </div>
+                                    </div>
+
+                                </fieldset>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                <input type="submit" value="Salvar" class="btn btn-primary" ></input>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
 
             <!-- Bootstrap core JavaScript
