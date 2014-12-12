@@ -14,9 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             break;
     }
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $controller = new RecursosController();
-    $controller->insert($_POST['nome']);
-    header("Location: ../recursos.php");
+    if (isset($_POST['acao'])) {
+        $controller = new RecursosController();
+        $controller->delete(json_decode(str_replace('\\', '', $_POST['recurso'])));
+    } else {
+        $controller = new RecursosController();
+        $controller->insert($_POST['nome']);
+        header("Location: ../recursos.php");
+    }
 }
 
 class RecursosController {
@@ -35,6 +40,10 @@ class RecursosController {
     public function insert($nome) {
         $evento = new Recurso($nome);
         $this->dao->insert($evento);
+    }
+
+    public function delete($recurso) {
+        $this->dao->delete($recurso->id);
     }
 
 }

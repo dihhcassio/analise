@@ -124,9 +124,6 @@
             <script>
                 function operateFormatter(value, row, index) {
                     return [
-                        '<a class="editar ml10" href="javascript:void(0)" title="Editar">',
-                        '<i class="glyphicon glyphicon-pencil"></i>',
-                        '</a>',
                         '<a class="remove ml10" href="javascript:void(0)" title="Remove">',
                         '<i class="glyphicon glyphicon-remove"></i>',
                         '</a>'].join('');
@@ -135,16 +132,13 @@
                 window.operateEvents = {
                     'click .remove': function(e, value, row, index) {
                         if (confirm("Deseja deletar esse registro?")) {
-                            var posting = $.post("controller/deletePaciente.php",
-                                    {paciente: JSON.stringify(row)});
+                            var posting = $.post("controller/EventosController.php",
+                                    {evento: JSON.stringify(row),
+                                     acao:'deletar'});
                             posting.done(function(data) {
                                 location.reload();
                             });
                         }
-                    },
-                    'click .editar': function(e, value, row, index) {
-                        $(window.document.location).attr('href', "Cadastro.php?paciente="
-                                + JSON.stringify(row));
                     }
                 };
             </script>

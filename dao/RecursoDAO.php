@@ -25,8 +25,8 @@ class RecursoDAO extends AbstractDAO {
                         . " WHERE id = " . $model->getId());
     }
 
-    public function delete($model) {
-        return $this->execultQuery("DELETE FROM recurso WHERE id =" . $model->getId());
+    public function delete($id) {
+        return $this->execultQuery("DELETE FROM recurso WHERE id =" . $id);
     }
 
 }

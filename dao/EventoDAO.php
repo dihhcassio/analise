@@ -6,19 +6,25 @@ include_once 'AbstractDAO.php';
 class EventoDAO extends AbstractDAO {
 
     public function getAll() {
-        return $this->execultQuery('SELECT id, nome FROM evento');
+        return $this->execultQuery("SELECT id, nome, to_char(inicio, 'DD/MM/YYYY HH24:MI:SS') as inicio,
+            to_char(fim, 'DD/MM/YYYY HH24:MI:SS') as fim FROM evento");
     }
 
     public function getById($id) {
-        return $this->execultQuery('SELECT id, nome FROM evento'
+        return $this->execultQuery('SELECT * FROM evento'
                         . ' WHERE id = ' . $id);
     }
 
+    public function getAllOrderFim() {
+        return $this->execultQuery('SELECT id, nome, inicio, fim
+            FROM evento order BY fim  asc');
+    }
+
     public function insert($model) {
-        return $this->execultQuery("INSERT INTO evento(nome, inicio, fim)"
+         return $this->execultQuery("INSERT INTO evento(nome, inicio, fim)"
                         . " VALUES('" . $model->getNome() . "', "
                         . " '" . $model->getInicio() . "',"
-                        . " '" . $model->getFim() .  "')");   
+                        . " '" . $model->getFim() . "')");
     }
 
     public function update($model) {
@@ -27,8 +33,9 @@ class EventoDAO extends AbstractDAO {
                         . " WHERE id = " . $model->getId());
     }
 
-    public function delete($model) {
-        return $this->execultQuery("DELETE FROM evento WHERE id =" . $model->getId());
+    public function delete($id) {
+        
+        return $this->execultQuery("DELETE FROM evento WHERE id = " . $id);
     }
 
 }
